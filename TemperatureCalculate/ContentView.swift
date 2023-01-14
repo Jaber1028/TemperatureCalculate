@@ -13,6 +13,8 @@ struct ContentView: View {
     @State private var selectedUnit = "fehrenheit"
     @State private var selectedOutputUnit = "fehrenheit"
     
+    @FocusState private var isKeyboardFocused: Bool
+    
     var inputInit: Measurement<UnitTemperature> {
         if selectedUnit == "fehrenheit" {
             return Measurement(value: val, unit: UnitTemperature.fahrenheit)
@@ -40,6 +42,7 @@ struct ContentView: View {
                 Section {
                     TextField("enter a temperature to be converted", value: $val, format: .number)
                         .keyboardType(.decimalPad)
+                        .focused($isKeyboardFocused)
                     Picker("Which Unit is this?", selection: $selectedUnit) {
                         ForEach(Units, id: \.self) {
                             Text($0)
@@ -62,6 +65,16 @@ struct ContentView: View {
                     Text("Result: \(res.description)")
                 }
             } .navigationTitle("Temperature Calculate")
+                .toolbar {
+                    ToolbarItemGroup(placement: .keyboard) {
+                        Spacer()
+                        
+                        Button("Done") {
+                            isKeyboardFocused = false
+                        }
+                        
+                    }
+                }
         }
     }
 }
