@@ -38,7 +38,8 @@ struct ContentView: View {
         NavigationStack {
             Form {
                 Section {
-                    TextField("Please enter a temperature to be converted", value: $val, format: .number)
+                    TextField("enter a temperature to be converted", value: $val, format: .number)
+                        .keyboardType(.decimalPad)
                     Picker("Which Unit is this?", selection: $selectedUnit) {
                         ForEach(Units, id: \.self) {
                             Text($0)
