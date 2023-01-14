@@ -38,12 +38,14 @@ struct ContentView: View {
         NavigationStack {
             Form {
                 Section {
-                    TextField("Please enter a temperature to be convereted", value: $val, format: .number)
+                    TextField("Please enter a temperature to be converted", value: $val, format: .number)
                     Picker("Which Unit is this?", selection: $selectedUnit) {
                         ForEach(Units, id: \.self) {
                             Text($0)
                         }
-                    }
+                    } .pickerStyle(.segmented)
+                } header: {
+                    Text("Please enter a temperature to be converted")
                 }
                 
                 Section {
@@ -52,11 +54,13 @@ struct ContentView: View {
                             Text($0)
                         }
                     } .pickerStyle(.segmented)
+                } header: {
+                    Text("Choose Output format")
                 }
                 Section {
                     Text("Result: \(res.description)")
                 }
-            }
+            } .navigationTitle("Temperature Calculate")
         }
     }
 }
