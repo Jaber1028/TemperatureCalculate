@@ -17,14 +17,10 @@ struct ContentView: View {
         if selectedUnit == "fehrenheit" {
             return Measurement(value: val, unit: UnitTemperature.fahrenheit)
         }
-        else if selectedUnitTe == "celsius" {
+        else if selectedUnit == "celsius" {
             return Measurement(value: val, unit: UnitTemperature.celsius)
         }
-        else {
-            return Measurement(value: val, unit: UnitTemperature.kelvin)
-        }
-                               
-        
+        return Measurement(value: val, unit: UnitTemperature.kelvin)
     }
     
     var res : Measurement<UnitTemperature> {
@@ -34,9 +30,8 @@ struct ContentView: View {
         else if selectedOutputUnit == "celsius" {
             return inputInit.converted(to: .celsius)
         }
-        else {
-            return inputInit.converted(to: .kelvin)
-        }
+        
+        return inputInit.converted(to: .kelvin)
     }
     
     var body: some View {
